@@ -10,15 +10,17 @@ for (let i = 0; i < 9; i++) {
             missed.textContent++;
         }
 
-        if (dead.textContent == 10) {
-            dead.textContent = 0;
-            missed.textContent = 0;
+        if (+dead.textContent === 10) {
             alert('Вы выиграли');
+            reset();
 
-        } else if (missed.textContent == 5) {
-            dead.textContent = 0;
-            missed.textContent = 0;
+        } else if (+missed.textContent === 5) {
             alert('Вы проиграли');
+            reset();
         }
+    }
+    const reset = () => {
+        dead.textContent = 0;
+        missed.textContent = 0;
     }
 }
