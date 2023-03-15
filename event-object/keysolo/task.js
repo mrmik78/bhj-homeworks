@@ -25,6 +25,9 @@ class Game {
       При неправильном вводе символа - this.fail();
       DOM-элемент текущего символа находится в свойстве this.currentSymbol.
      */
+    document.addEventListener('keydown', (event) => {
+      this.currentSymbol.textContent === event.key ? this.success() : this.fail()
+    });
   }
 
   success() {
@@ -70,7 +73,7 @@ class Game {
         'popcorn',
         'cinema',
         'love',
-        'javascript'
+        'javascript'        
       ],
       index = Math.floor(Math.random() * words.length);
 
