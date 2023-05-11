@@ -18,20 +18,25 @@ chatWidget.addEventListener('click', () => {
 });
 
 chatWidgetInput.addEventListener('keydown', event => {
-  if (event.key === 'Enter' && chatWidgetInput.value !== '') {
+  if (event.key === 'Enter' && chatWidgetInput.value !== '' && chatWidgetInput.value.trim() ) {
+    
     messages.innerHTML += `
       <div class="message message_client">
-        <div class="message__time">${new Date().getHours()}:${new Date().getMinutes()}</div>
-        <div class="message__text">${chatWidgetInput.value}</div>       
+        <div class="message__time">${new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</div>
+        <div class="message__text">${chatWidgetInput.value.trim()}</div>       
       </div> 
     `
     chatWidgetInput.value = '';
+    
 
     messages.innerHTML += `
       <div class="message">
-        <div class="message__time">${new Date().getHours()}:${new Date().getMinutes()}</div>
+        <div class="message__time">${new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</div>
         <div class="message__text">${botMessages[Math.floor(Math.random() * botMessages.length)]}</div>
       </div>
     `
+document.querySelector('.chat-widget__messages-container').scrollTo(0, 1000);
+  timer();
+  
   }
 });
