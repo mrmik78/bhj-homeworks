@@ -1,6 +1,6 @@
 const editor = document.getElementById('editor');
-editor.textContent = localStorage.text;
+editor.value = localStorage.getItem('text');
 
 editor.addEventListener('keyup', () => {
-  localStorage.setItem('text', editor.value);
+  localStorage.text = editor.value;;
 });

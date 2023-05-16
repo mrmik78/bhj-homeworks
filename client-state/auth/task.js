@@ -15,21 +15,23 @@ if (localStorage.userName) {
     signin.classList.add("signin_active");
 }
 
-
 signBtn.addEventListener("click", (func) => {
-    let formData = new FormData(form);
+    func.preventDefault();
+
+    const formData = new FormData(form);
     const xhr = new XMLHttpRequest();
+    xhr.responseType = 'json';
 
     xhr.open("POST", "https://students.netoservices.ru/nestjs-backend/auth");
     xhr.send(formData);
+    
     xhr.onload = () => {
-        let authData = JSON.parse(xhr.responseText);
-        if (authData.success) {
-            localStorage.userName = authData["user_id"];
+        if (xhr.response.success) {
+            localStorage.userName = xhr.response["user_id"];
             greetingUser();
         } else {
             alert("Неверный логин/пароль");
         }
     }
-    func.preventDefault();
+    form.reset()
 })
